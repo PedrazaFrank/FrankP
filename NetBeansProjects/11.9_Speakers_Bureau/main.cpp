@@ -119,58 +119,62 @@ void EditStruct(Employee *s){
         cin >> choice;
         cout << endl;
 
-        //changes user input to proper element numbering    //changes user input to proper element numbering
-        int i=choice-1;
-        //submenu to prompt user to pick which element of the structure to edit
-        do{
-            cout << "What would you like to edit?" << endl;
-            cout << "Enter the number of the information you would like to edit: " << endl;
-            cout << "1: Name" << endl;
-            cout << "2: Phone Number" << endl;
-            cout << "3: Topic" << endl;
-            cout << "4: Fee" << endl;
-            cout << "5: Exit" << endl;
-            cout << "Please choose an option: ";
-            cin >> element;
-            cout << endl;
-		
-            switch(element){
-                case '1': 
-                    cout << "Change name of " << s[i].name << ": ";
-                    cin.ignore();
-                    getline(cin, s[i].name); //overwrites string name of the chosen element
-                    cout << "What would you like to edit?" << endl;
-                    break;
-                case '2': 
-                    cout << "Change phone number of " << s[i].name << ": ";
-                    cin.ignore();
-                    getline(cin,s[i].phoneNumber); //overwrites string phone number of the chosen element
-                    break;
-                case '3': 
-                    cout << "Change topic of " << s[i].name << ": ";
-                    cin.ignore();
-                    getline(cin,s[i].topic); //overwrites string topic of the chosen element
-                    break;
-                case '4': 
-                    cout << "Change fee of " << s[i].name << ": ";
-                    cin.ignore();
-                    cin >> s[i].fee; //overwrites float fee of the chosen element
+        if(choice<11){
+            //changes user input to proper element numbering    //changes user input to proper element numbering
+            int i=choice-1;
 
-                    //validates input to deny negative numbers
-                    while(s[i].fee < 0){
-                        cout << "Fee cannot be a negative number." << endl;  cout << "Fee cannot be a negative number." << endl;
-                        cout << "Fee: ";
-                        cout << "Change fee of " << s[i].name << ": ";  cin >> s[i].fee;
-                    }
-                    break;
-                default :
-                    break;
-            }
-        } while ((element<='4')&&(element>='1'));
+            //sub-menu to prompt user to pick which member of the structure to edit
+            do{
+                cout << "What would you like to edit?" << endl;
+                cout << "Enter the number of the information you would like to edit: " << endl;
+                cout << "1: Name" << endl;
+                cout << "2: Phone Number" << endl;
+                cout << "3: Topic" << endl;
+                cout << "4: Fee" << endl;
+                cout << "5: Exit" << endl;
+                cout << "Please choose an option: ";
+                cin >> element;
+                cout << endl;
+
+                switch(element){
+                    case '1': 
+                        cout << "Change name of " << s[i].name << ": ";
+                        cin.ignore();
+                        getline(cin, s[i].name); //overwrites string name of the chosen element
+                        cout << "What would you like to edit?" << endl;
+                        break;
+                    case '2': 
+                        cout << "Change phone number of " << s[i].name << ": ";
+                        cin.ignore();
+                        getline(cin,s[i].phoneNumber); //overwrites string phone number of the chosen element
+                        break;
+                    case '3': 
+                        cout << "Change topic of " << s[i].name << ": ";
+                        cin.ignore();
+                        getline(cin,s[i].topic); //overwrites string topic of the chosen element
+                        break;
+                    case '4': 
+                        cout << "Change fee of " << s[i].name << ": ";
+                        cin.ignore();
+                        cin >> s[i].fee; //overwrites float fee of the chosen element
+
+                        //validates input to deny negative numbers
+                        while(s[i].fee < 0){
+                            cout << "Fee cannot be a negative number." << endl;  cout << "Fee cannot be a negative number." << endl;
+                            cout << "Fee: ";
+                            cout << "Change fee of " << s[i].name << ": ";  cin >> s[i].fee;
+                        }
+                        break;
+                    default :
+                        break;
+                }
+            } while ((element<='4')&&(element>='1'));
+        }
     }while((choice>=1)&&(choice<=10));
     cout << endl;
 }
-//
+
+//Print the array of structures
 void PrintStruct(Employee *s){
     //loop to display all information for all speakers
     for(int i=0; i<NUM_SPEAKERS; i++){
