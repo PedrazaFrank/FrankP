@@ -1,0 +1,42 @@
+<html>
+<head>
+<title>Frank Pedraza A2P1</title>
+</head>
+
+<body style="background-color:navajowhite;">
+<h1>Frank Pedraza A2P1</h1>
+
+<script language="JavaScript" type="text/javascript">
+<!--
+    var first = prompt("Please enter your first name: ");
+    var gpa = prompt("Please enter your GPA, "+first);
+    gpa = parseFloat(gpa);
+   
+    if (gpa < 1.0) 
+    {
+        document.write('<p>'+first+', your GPA of '+gpa.toFixed(2)+' results in an F grade.</p>');
+    }
+    else if (gpa < 2.0) 
+    {
+        document.write('<p>'+first+', your GPA of '+gpa.toFixed(2)+' results in a D grade.</p>');
+    }
+    else if (gpa < 3.0) 
+    {
+        document.write('<p>'+first+', your GPA of '+gpa.toFixed(2)+' results in a C grade.</p>');
+    }
+    else if (gpa < 4.0) 
+    {
+        document.write('<p>'+first+', your GPA of '+gpa.toFixed(2)+' results in a B grade.</p>');
+    }
+    else if (gpa >= 4.0 && gpa<=5.0) 
+    {
+        document.write('<p>'+first+', your GPA of '+gpa.toFixed(2)+' results in an A grade.</p>');
+    }
+    else {
+        document.write('<p>Please enter a valid GPA.</p>');
+    }
+//-->
+</script>
+
+</body>
+</html>

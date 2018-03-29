@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Sample Loops</title>
+</head>    
+<body>
+    <h1>Sample Loops</h1>
+    
+    <script>
+        var x = 10;
+        while (x>=1){
+            alert('Inside the while loop, x = ' + x);
+            x--;
+        }
+        alert('Outside the while loop, Blastoff!');
+        
+        
+        document.write('<table border="1" cellpadding="5"><tr><th>Product</th><th>Price</th></tr>');
+        for(var i=100; i>=1; i--){
+            price = i*i*Math.PI;
+            document.write('<tr><td>Product ' + (101-i) + '</td><td>$' + price.toFixed(2) + '</td></tr>');
+        }
+        document.write('</table>');
+    
+    </script>
+    
+</body>    
+
+
+</html>

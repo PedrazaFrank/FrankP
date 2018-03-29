@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>A2P4 by Frank Pedraza</title>
+</head>
+<body style="background-color: lightgrey">
+<h1>A2P4 House of Cards Magic Shop</h1>
+<p>Shop here and make your money disappear.</p>
+<p>This months specials:</p>
+<table border="1" cellspacing="0" cellpadding="6" summary="Table of product images and prices and descriptions">
+  <tbody>
+    <tr>
+      <td><img src="Images/magic_wand.png" alt="Magic Wand" height="150" width="150"></td>
+      <td><p style="font-weight: bold">$3.95 Magic Wand</p>
+      <p>Every magician needs a magic wand.</p></td>
+    </tr>
+    <tr>
+      <td><img src="Images/cards.png" alt="Playing Cards" height="150" width="150"></td>
+      <td><p style="font-weight: bold">$7.49 Set of Playing Cards</p>
+      <p>Perfect for party tricks, or for playing poker.</p></td>
+    </tr>
+  </tbody>
+</table>
+<script>
+    var FirstName = prompt('Welcome to House of Cards Magic Shop. Please enter your name.');
+    var numWand = prompt(FirstName+', How many magic wands would you like to purchase today?');
+    var numCards = prompt(FirstName+', How many sets of playing cards would you like to purchase today?');
+    document.write('<h2>'+numWand+' magic wands and '+numCards+' playing cards were ordered by '+FirstName+'!</h2<br>');
+    var totalWand = numWand*3.95;
+    var totalCards = numCards*7.49;
+    var subTotal = totalCards+totalWand;
+    var tax = subTotal*0.08;
+    var total = subTotal+tax;
+    document.write('<h3>'+numWand+' magic wands at $3.95 each ... $'+totalWand.toFixed(2));
+    document.write('<h3>'+numCards+' sets of playing cards at $7.49 each ... $'+totalCards.toFixed(2));
+    document.write('<h3>Subotal for order ... $'+subTotal.toFixed(2)+'<h3>');
+    document.write('<h3>Tax for order ... $'+tax.toFixed(2)+'<h3>');
+    document.write('<h3>Total for order ... $'+total.toFixed(2)+'<h3>');
+</script>
+</body>
+</html>

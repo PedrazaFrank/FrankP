@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>A3P? by YOUR NAME HERE</title>
+    <script>
+    var bowlPrice = 10;
+    </script>
+    <script>
+    function processOrder(){
+        var objName=document.getElementById('txtName'); 
+        var strName=objName.value; 
+        var strSentence = 'Hi ' + strName + ', thank you for your order!';
+        var numBowls = document.getElementById('txtQ1').value;
+        var strSentence2= 'I see you have ordered ' + numBowls + ' cereal bowls.';
+        var strParagraph = strSentence + '<br>' + strSentence2;
+        document.getElementById('receipt').innerHTML=strParagraph;
+    }
+</script>
+</head>
+<body>
+<h1>A3P1  Zombie Store A3P1</h1>
+<p>STORE INTRODUCTION GOES HERE</p>
+<p>This months specials:</p>
+<form>
+<table border="1" cellspacing="0" cellpadding="6" summary="Table of product images, prices & descriptions">
+  <tbody>
+      <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>Please enter your name:<br><input type="text" id="txtName" name="txtName">
+      </td>
+    </tr>
+    <tr>
+      <td><img src="cereal.jfif" alt="zombie cereal bowl" height="125" width="125"></td>
+      <td><p style="font-weight: bold">
+        <script>document.write('$',bowlPrice.toFixed(2));</script>
+        Zombie Cereal Bowl</p><p>Start your day with cereal from a Zombie Bowl</p></td>
+      <td>Quantity:<br><input type="text" id="txtQ1" name="txtQ1"></td>
+    </tr>
+    <tr>
+      <td><img src="takis.jfif" alt="zombie takis" height="125" width="125"></td>
+      <td><p style="font-weight: bold">$2 Thingys</p>
+      <p>PRODUCT #2 DESCRIPTION GOES HERE </p></td>
+      <td>Quantity:<br><input type="text" id="txtQ2" name="txtQ2"></td>
+    </tr>
+  </tbody>
+</table>
+    
+<p>
+<input type="button" value="Process Order" id="btnProcess" onClick="processOrder();">
+</p>
+    
+    
+</form>
+<div id="receipt">&nbsp;</div>
+</body>
+</html>
