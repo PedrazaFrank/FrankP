@@ -14,8 +14,9 @@ class Array{
         int cols;
         int **data;
     public:
+        Array(int, int);
+        ~Array(){delete []data;}
+        int getData(int, int)const;
 };
-
-
 
 #endif /* ARRAY_H */
