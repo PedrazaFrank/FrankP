@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>A4P2 by Frank Pedraza</title>
+<script>
+    function checkInput(input){
+        input=parseInt(input);
+        while(isNaN(input) || (input<0) || (input >100)){
+        input = prompt('Invalid input.\nPlease enter a valid number.');
+        input=parseInt(input);
+        }
+        return input;
+    }
+</script>
+</head>
+<body style="background-color: lightgrey">
+<h1>A4P2 House of Cards Magic Shop</h1>
+<p>Shop here and make your money disappear.</p>
+<p>This months specials:</p>
+<table border="1" cellspacing="0" cellpadding="6" summary="Table of product images and prices and descriptions">
+  <tbody>
+    <tr>
+      <td><img src="Images/magic_wand.png" alt="Magic Wand" height="150" width="150"></td>
+      <td><p style="font-weight: bold">$4 Magic Wand</p>
+      <p>Every magician needs a magic wand.</p></td>
+    </tr>
+    <tr>
+      <td><img src="Images/cards.png" alt="Playing Cards" height="150" width="150"></td>
+      <td><p style="font-weight: bold">$7 Set of Playing Cards</p>
+      <p>Perfect for party tricks, or for playing poker.</p></td>
+    </tr>
+  </tbody>
+</table>
+<script>
+    var FirstName = prompt('Welcome to House of Cards Magic Shop. Please enter your name.');
+    
+    while(FirstName == ""){
+        FirstName = prompt('Invalid input.\nPlease enter your name.');
+    }
+    
+    var numWand = prompt(FirstName+', How many magic wands would you like to purchase today?');
+    
+    numWand = checkInput(numWand);
+    
+    var numCards = prompt(FirstName+', How many sets of playing cards would you like to purchase today?');
+    
+    numCards = checkInput(numCards);
+    
+    document.write('<h2>'+numWand+' magic wands and '+numCards+' playing cards were ordered by '+FirstName+'!</h2');
+    
+</script>
+</body>
+</html>

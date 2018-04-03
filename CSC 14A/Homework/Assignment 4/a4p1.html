@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>A4P1 by Frank Pedraza</title>
+</head>
+<body style="background-color: lightgrey">
+<h1>A4P1 House of Cards Magic Shop</h1>
+<p>Shop here and make your money disappear.</p>
+<p>This months specials:</p>
+<table border="1" cellspacing="0" cellpadding="6" summary="Table of product images and prices and descriptions">
+  <tbody>
+    <tr>
+      <td><img src="Images/magic_wand.png" alt="Magic Wand" height="150" width="150"></td>
+      <td><p style="font-weight: bold">$4 Magic Wand</p>
+      <p>Every magician needs a magic wand.</p></td>
+    </tr>
+    <tr>
+      <td><img src="Images/cards.png" alt="Playing Cards" height="150" width="150"></td>
+      <td><p style="font-weight: bold">$7 Set of Playing Cards</p>
+      <p>Perfect for party tricks, or for playing poker.</p></td>
+    </tr>
+  </tbody>
+</table>
+<script>
+    var FirstName = prompt('Welcome to House of Cards Magic Shop. Please enter your name.');
+    
+    while(FirstName == 0){
+        FirstName = prompt('Invalid input.\nPlease enter your name.');
+    }
+    
+    var numWand = prompt(FirstName+', How many magic wands would you like to purchase today?');
+    
+    numWand=parseInt(numWand);
+    while(isNaN(numWand) || (numWand<0) || (numWand >100)){
+        numWand = prompt('Invalid input.\nPlease enter a valid number.');
+        numWand=parseInt(numWand);
+    }
+    
+    var numCards = prompt(FirstName+', How many sets of playing cards would you like to purchase today?');
+    
+    numCards=parseInt(numCards);
+    while(isNaN(numCards) || (numCards<0) || (numCards >100)){
+        numCards = prompt('Invalid input.\nPlease enter a valid number.');
+        numCards=parseInt(numCards);
+    }
+    
+    document.write('<h2>'+numWand+' magic wands and '+numCards+' playing cards were ordered by '+FirstName+'!</h2');
+    
+</script>
+</body>
+</html>

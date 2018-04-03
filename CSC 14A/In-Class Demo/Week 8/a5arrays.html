@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Sample Arrays</title>
+</head>    
+<body>
+    <h1>Sample Arrays</h1>
+    
+    <script>
+        
+        var products = [ "Beef Jerky", "Turkey Jerky", "Chicken Jerky" ];
+        
+        var prices = [ 5.99, 7.95, 7.99 ];
+        
+        alert(products[0] + ' costs $' + prices[0]);
+        
+        var numProducts = parseInt(prompt("How many products do you want to see?"));
+        
+        document.write('<table border="1" cellpadding="5"><tr><th>Product</th><th>Price</th></tr>');
+        
+        for(var i=1; i<=numProducts; i++){
+            price = 5.00 + (i-1)*0.01;
+            document.write('<tr><td>Product ' + i + '</td><td>$' + price.toFixed(2) + '</td></tr>');
+        }
+        document.write('</table>');
+    
+    </script>
+    
+</body>    
+
+
+</html>

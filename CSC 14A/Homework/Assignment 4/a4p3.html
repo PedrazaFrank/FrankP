@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>A4P3 by Frank Pedraza</title>
+<script>
+    var wandPrice=4.90;
+    var cardsPrice=7.49;
+ 
+    function processOrder(){
+		var strTab='&nbsp;&nbsp;&nbsp;&nbsp;';
+		
+        var objName=document.getElementById('txtName');
+        var strName=objName.value;
+        
+        var numWands=document.getElementById('txtQ1').value;
+        if(numWands==""){
+            numWands=0;
+        }
+        var numCards=document.getElementById('txtQ2').value;
+        if(numCards==""){
+            numCards=0;
+        }
+        
+        var wandTotal=numWands*wandPrice;
+        var cardsTotal=numCards*cardsPrice;
+        var subTotal=wandTotal+cardsTotal;
+        var tax=subTotal*0.08;
+        var total=subTotal+tax;
+        
+        var strSentence='Thank you for your order, '+strName+'.<br>You ordered '+numWands+' magic wands and '+numCards+' sets of playing cards.<br>';
+        
+        var strWands=numWands+' magic wands at $'+wandPrice.toFixed(2)+' each:$'+wandTotal.toFixed(2)+'<br>';
+        
+        var strCards=numCards+' sets of playing cards at $'+cardsPrice.toFixed(2)+' each: $'+cardsTotal.toFixed(2)+'<br>';
+        
+        var strSubTotal='Subtotal: $'+subTotal.toFixed(2)+'<br>';
+		var strTax='Tax: $'+tax.toFixed(2)+'<br>';
+		var strTotal='Total: $'+total.toFixed(2)+'<br>';
+        
+        document.getElementById('receipt').innerHTML=strSentence+strWands+strCards+strSubTotal+strTax+strTotal;
+    }
+    
+    function discountTable(){
+        var beginTable = '<table><tr><td colspan="3">Quantity Discount Pricing for Magic Wands</td></tr>';
+        
+        var tableHeader = '<tr><th>Quantity</th><th>Normal Pricing</th><th>Discount Pricing</th></tr>';
+        
+        
+        /*var tableRow;
+        for(int i=10; i<=100; i+=10){
+            tableRow = '<tr><td>'+i+'</td><td>'+i+'</td><td>'+i+'</td></tr>';
+        }
+        ********************************
+        *  Give tableRow a class value *
+        *  then try to go from there   *
+        ********************************
+        */
+        
+        
+        var tableEnd = '</table>';
+        
+        document.getElementById('discountPrice').innerHTML = beginTable + tableHeader + tableEnd;
+    }
+    
+</script>
+<style>
+body {
+	background-color: lightgrey;
+}
+table {
+	border: none;	
+}	
+tbody tr td {
+	border: none;
+}
+.col3 {
+	text-align: center;
+}
+</style>
+</head>
+<body>
+<h1>A4P3  House of Cards Magic Shop</h1>
+<p>Shop here and make your money disappear.</p>
+<p>This months specials:</p>
+<form>
+<table border="1" cellspacing="0" cellpadding="6" summary="Table of product images, prices & descriptions">
+  <tbody>
+      <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td class="col3">Please enter your name:<br><input type="text" id="txtName" name="txtName">
+      </td>
+    </tr>
+    <tr>
+      <td><img src="Images/magic_wand.png" alt="Magic Wand" height="150" width="150"></td>
+      <td><p style="font-weight: bold">$<script>document.write(wandPrice.toFixed(2))</script> Magic Wand</p>
+      <p>Every magician needs a magic wand.</p></td>
+      <td>Quantity:<br><input type="text" id="txtQ1" name="txtQ1"></td>
+    </tr>
+    <tr>
+      <td><img src="Images/cards.png" alt="Playing Cards" height="150" width="150"></td>
+      <td><p style="font-weight: bold">$<script>document.write(cardsPrice.toFixed(2))</script> Set of Playing Cards</p>
+      <p>Perfect for party tricks, or for playing poker.</p></td>
+      <td>Quantity:<br><input type="text" id="txtQ2" name="txtQ2"></td>
+    </tr>
+  </tbody>
+</table>
+<p>
+<input type="button" value="Process Order" id="btnProcess">
+<input type="button" value="Display Quantity Pricing" id="discount">
+</p>
+
+</form>
+<div id="receipt">&nbsp;</div>
+    <br><br>
+<div id="discountPrice">&nbsp;</div>
+<script>
+    document.getElementById('btnProcess').addEventListener("click", processOrder);
+    document.getElementById('discount').addEventListener("click", discountTable);
+</script>
+</body>
+</html>
