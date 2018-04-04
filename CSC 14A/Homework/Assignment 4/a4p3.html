@@ -41,26 +41,46 @@
         document.getElementById('receipt').innerHTML=strSentence+strWands+strCards+strSubTotal+strTax+strTotal;
     }
     
-    function discountTable(){
+ /*  function discountTable(){
+        var discountItem = "<p>Quantity Discount Pricing for Magic Wands</p>";
+        
+        var header = "<p>Quantity....Normal Pricing....Discount Pricing</p>";
+        
+        var rows="";
+        for(var i=10; i<=100; i+=10){
+            var normal=(wandPrice*i);
+            var discount=normal*0.10;
+            var discountPrice=normal-discount;
+            rows+="<p>"+i+"..........."+normal.toFixed(2)+"..........."+discountPrice.toFixed(2)+"</p>";
+        }
+        
+        document.getElementById('discountPrice').innerHTML = discountItem + header + rows;
+    }*/
+    
+   function discountTable(){
         var beginTable = '<table><tr><td colspan="3">Quantity Discount Pricing for Magic Wands</td></tr>';
         
         var tableHeader = '<tr><th>Quantity</th><th>Normal Pricing</th><th>Discount Pricing</th></tr>';
         
-        
-        /*var tableRow;
-        for(int i=10; i<=100; i+=10){
-            tableRow = '<tr><td>'+i+'</td><td>'+i+'</td><td>'+i+'</td></tr>';
+       var tableRows='';
+        for(var i=10; i<=100; i+=10){
+            tableRows += '<tr><td>'+i+'</td><td>'+i+'</td><td>'+i+'</td></tr>';
         }
-        ********************************
-        *  Give tableRow a class value *
-        *  then try to go from there   *
-        ********************************
-        */
-        
+       /*
+       *****************************************************************
+       *Example for loop innerhtml                                     *
+       *var chalkboard='';                                             *
+       *var sentence = "Sample sentence.";                             *
+       *for(var i=1; i<=50; i++){                                      *
+       *chalkboard =chalkboard+'<p>'+i+'.'+sentence+'</p>';            *
+       *}                                                              *
+       *document.getElementById('discountPrice').innerHTML= chalkboard;*
+       *****************************************************************
+       */
         
         var tableEnd = '</table>';
         
-        document.getElementById('discountPrice').innerHTML = beginTable + tableHeader + tableEnd;
+        document.getElementById('discountPrice').innerHTML = beginTable + tableHeader + tableRows + tableEnd;
     }
     
 </script>
@@ -68,12 +88,14 @@
 body {
 	background-color: lightgrey;
 }
-table {
-	border: none;	
-}	
-tbody tr td {
+table, tbody, tr, td {
 	border: none;
-}
+    
+}	
+/*tbody{
+	border: none;
+    width: auto;
+}*/
 .col3 {
 	text-align: center;
 }
@@ -121,3 +143,5 @@ tbody tr td {
 </script>
 </body>
 </html>
+
+
