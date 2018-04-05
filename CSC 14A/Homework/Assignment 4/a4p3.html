@@ -41,7 +41,7 @@
         document.getElementById('receipt').innerHTML=strSentence+strWands+strCards+strSubTotal+strTax+strTotal;
     }
     
- /*  function discountTable(){
+   function discountTable(){
         var discountItem = "<p>Quantity Discount Pricing for Magic Wands</p>";
         
         var header = "<p>Quantity....Normal Pricing....Discount Pricing</p>";
@@ -51,38 +51,11 @@
             var normal=(wandPrice*i);
             var discount=normal*0.10;
             var discountPrice=normal-discount;
-            rows+="<p>"+i+"..........."+normal.toFixed(2)+"..........."+discountPrice.toFixed(2)+"</p>";
+            rows+="<p>..."+i+"...............$"+normal.toFixed(2)+"...............$"+discountPrice.toFixed(2)+"</p>";
         }
         
-        document.getElementById('discountPrice').innerHTML = discountItem + header + rows;
-    }*/
-    
-   function discountTable(){
-        var beginTable = '<table><tr><td colspan="3">Quantity Discount Pricing for Magic Wands</td></tr>';
-        
-        var tableHeader = '<tr><th>Quantity</th><th>Normal Pricing</th><th>Discount Pricing</th></tr>';
-        
-       var tableRows='';
-        for(var i=10; i<=100; i+=10){
-            tableRows += '<tr><td>'+i+'</td><td>'+i+'</td><td>'+i+'</td></tr>';
-        }
-       /*
-       *****************************************************************
-       *Example for loop innerhtml                                     *
-       *var chalkboard='';                                             *
-       *var sentence = "Sample sentence.";                             *
-       *for(var i=1; i<=50; i++){                                      *
-       *chalkboard =chalkboard+'<p>'+i+'.'+sentence+'</p>';            *
-       *}                                                              *
-       *document.getElementById('discountPrice').innerHTML= chalkboard;*
-       *****************************************************************
-       */
-        
-        var tableEnd = '</table>';
-        
-        document.getElementById('discountPrice').innerHTML = beginTable + tableHeader + tableRows + tableEnd;
+        document.getElementById('discountPrice').innerHTML = discountItem.bold() + header + rows;
     }
-    
 </script>
 <style>
 body {
@@ -91,11 +64,7 @@ body {
 table, tbody, tr, td {
 	border: none;
     
-}	
-/*tbody{
-	border: none;
-    width: auto;
-}*/
+}
 .col3 {
 	text-align: center;
 }
@@ -118,13 +87,13 @@ table, tbody, tr, td {
       <td><img src="Images/magic_wand.png" alt="Magic Wand" height="150" width="150"></td>
       <td><p style="font-weight: bold">$<script>document.write(wandPrice.toFixed(2))</script> Magic Wand</p>
       <p>Every magician needs a magic wand.</p></td>
-      <td>Quantity:<br><input type="text" id="txtQ1" name="txtQ1"></td>
+      <td class="col3">Quantity:<br><input type="text" id="txtQ1" name="txtQ1"></td>
     </tr>
     <tr>
       <td><img src="Images/cards.png" alt="Playing Cards" height="150" width="150"></td>
       <td><p style="font-weight: bold">$<script>document.write(cardsPrice.toFixed(2))</script> Set of Playing Cards</p>
       <p>Perfect for party tricks, or for playing poker.</p></td>
-      <td>Quantity:<br><input type="text" id="txtQ2" name="txtQ2"></td>
+      <td class="col3">Quantity:<br><input type="text" id="txtQ2" name="txtQ2"></td>
     </tr>
   </tbody>
 </table>

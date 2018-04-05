@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>A4P4 by Frank Pedraza</title>
+<script>
+    var wandPrice=4.90;
+    var cardsPrice=7.49;
+ 
+    function processOrder(){
+				
+        var objName=document.getElementById('txtName');
+        var strName=objName.value;
+        
+        var numWands=document.getElementById('txtQ1').value;
+        if(numWands==""){
+            numWands=0;
+        }
+        var numCards=document.getElementById('txtQ2').value;
+        if(numCards==""){
+            numCards=0;
+        }
+        
+        var wandTotal=numWands*wandPrice;
+        if(numWands>=10){
+            var normal=(wandPrice*numWands);
+            var discount=normal*0.10;
+            var discountPrice=normal-discount;
+            wandTotal=discountPrice;
+        }
+        
+        var cardsTotal=numCards*cardsPrice;
+        if(cardsTotal>=10){
+            var normal=(cardsPrice*numCards);
+            var discount=normal*0.10;
+            var discountPrice=normal-discount;
+            cardsTotal=discountPrice;
+        }
+        
+        var subTotal=wandTotal+cardsTotal;
+        var tax=subTotal*0.08;
+        var total=subTotal+tax;
+        
+        var strSentence='<table><tr><th colspan="2">Thank you for your order, '+strName+'.</th></tr><tr><td colspan="2">You ordered '+numWands+' magic wands and '+numCards+' sets of playing cards.</td></tr>';
+        
+        var strWands='<tr><td>'+numWands+' magic wands at $'+wandPrice.toFixed(2)+' each</td><td align="right">$'+wandTotal.toFixed(2)+'</td></tr>';
+        
+        var strCards='<tr><td>'+numCards+' sets of playing cards at $'+cardsPrice.toFixed(2)+' each</td><td align="right">$'+cardsTotal.toFixed(2)+'</td></tr>';
+        
+        var strSubTotal='<tr><td>Subtotal</td><td align="right">$'+subTotal.toFixed(2)+'</td></tr>';
+		var strTax='<tr><td>Tax</td><td align="right">$'+tax.toFixed(2)+'</td></tr>';
+		var strTotal='<tr><td>Total</td><td align="right">$'+total.toFixed(2)+'</td></tr></table>';
+        
+        document.getElementById('receipt').innerHTML=strSentence+strWands+strCards+strSubTotal+strTax+strTotal;
+    }
+    
+    function discountWandsTable(){
+        var beginTable = 'Quantity Discount Pricing for Magic Wands';
+        
+        var tableHeader = '<table id="pricingTable"><tr><th>Quantity</th><th>Normal Pricing</th><th>Discount Pricing</th></tr>';
+        
+       var tableRows='';
+        for(var i=10; i<=100; i+=10){
+            var normal=(wandPrice*i);
+            var discount=normal*0.10;
+            var discountPrice=normal-discount;
+            tableRows += '<tr><td>'+i+'</td><td>$'+normal.toFixed(2)+'</td><td>$'+discountPrice.toFixed(2)+'</td></tr>';
+        }
+        
+        var tableEnd = '</table>';
+        
+        document.getElementById('discountWandsPrice').innerHTML = beginTable.bold() + tableHeader + tableRows + tableEnd;
+    }
+    
+    
+    function discountCardsTable(){
+        var beginTable = 'Quantity Discount Pricing for Playing Cards';
+        
+        var tableHeader = '<table id="pricingTable"><tr><th>Quantity</th><th>Normal Pricing</th><th>Discount Pricing</th></tr>';
+        
+       var tableRows='';
+        for(var i=10; i<=100; i+=10){
+            var normal=(cardsPrice*i);
+            var discount=normal*0.10;
+            var discountPrice=normal-discount;
+            tableRows += '<tr><td>'+i+'</td><td>$'+normal.toFixed(2)+'</td><td>$'+discountPrice.toFixed(2)+'</td></tr>';
+        }
+        
+        var tableEnd = '</table>';
+        
+        document.getElementById('discountCardsPrice').innerHTML = beginTable.bold() + tableHeader + tableRows + tableEnd;
+    }
+
+</script>
+<style>
+    body {
+        background-color: lightgrey;
+    }
+    table, tbody, tr, td {
+	   border: none;
+    }
+    .col3 {
+	   text-align: center;
+    }
+    #pricingTable {
+        border: 2px #666 solid;
+        border-collapse: collapse;
+    }
+    #pricingTable th {
+        font-weight: bold;
+        text-align: right;
+        padding: 5px;
+        border-right: 1px #BBB solid;
+    }
+    #pricingTable td {
+        text-align: right;
+        padding: 5px;
+        border-right: 1px #BBB solid;
+    }
+    #pricingTable tr:nth-child(odd){
+        background: #8c8c8c;
+    }
+    #container div{
+        float: left;
+        margin: 0px 10px 15px 5px;
+    }
+    #container div div{
+        float: right;
+        margin: 0px 10px 15px 5px;
+    }
+</style>
+</head>
+<body>
+<h1>A4P4  House of Cards Magic Shop</h1>
+<p>Shop here and make your money disappear.</p>
+<p>This months specials:</p>
+<form>
+<table border="1" cellspacing="0" cellpadding="6" summary="Table of product images, prices & descriptions">
+  <tbody>
+      <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td class="col3">Please enter your name:<br><input type="text" id="txtName" name="txtName">
+      </td>
+    </tr>
+    <tr>
+      <td><img src="Images/magic_wand.png" alt="Magic Wand" height="150" width="150"></td>
+      <td><p style="font-weight: bold">$<script>document.write(wandPrice.toFixed(2))</script> Magic Wand</p>
+      <p>Every magician needs a magic wand.</p></td>
+      <td class="col3">Quantity:<br><input type="text" id="txtQ1" name="txtQ1"></td>
+    </tr>
+    <tr>
+      <td><img src="Images/cards.png" alt="Playing Cards" height="150" width="150"></td>
+      <td><p style="font-weight: bold">$<script>document.write(cardsPrice.toFixed(2))</script> Set of Playing Cards</p>
+      <p>Perfect for party tricks, or for playing poker.</p></td>
+      <td class="col3">Quantity:<br><input type="text" id="txtQ2" name="txtQ2"></td>
+    </tr>
+  </tbody>
+</table>
+<p>
+<input type="button" value="Process Order" id="btnProcess">
+<input type="button" value="Display Quantity Pricing" id="discount">
+</p>
+
+</form>
+<div id="receipt">&nbsp;</div>
+    <br><br>
+    <div id="container">
+        <div id="discountWandsPrice">&nbsp;</div>
+        <div id="discountCardsPrice">&nbsp;</div>
+    </div>
+<script>
+    document.getElementById('btnProcess').addEventListener("click", processOrder);
+    document.getElementById('discount').addEventListener("click", discountWandsTable);
+    document.getElementById('discount').addEventListener("click", discountCardsTable);
+</script>
+</body>
+</html>
+
+
