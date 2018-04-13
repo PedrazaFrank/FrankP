@@ -9,19 +9,19 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=GNU-MacOSX
 CND_ARTIFACT_DIR_Debug=dist/Debug/GNU-MacOSX
-CND_ARTIFACT_NAME_Debug=static_2d_array
-CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-MacOSX/static_2d_array
+CND_ARTIFACT_NAME_Debug=minesweeper
+CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-MacOSX/minesweeper
 CND_PACKAGE_DIR_Debug=dist/Debug/GNU-MacOSX/package
-CND_PACKAGE_NAME_Debug=static2darray.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/GNU-MacOSX/package/static2darray.tar
+CND_PACKAGE_NAME_Debug=minesweeper.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/GNU-MacOSX/package/minesweeper.tar
 # Release configuration
-CND_PLATFORM_Release=Cygwin-Windows
-CND_ARTIFACT_DIR_Release=dist/Release/Cygwin-Windows
-CND_ARTIFACT_NAME_Release=static_2d_array
-CND_ARTIFACT_PATH_Release=dist/Release/Cygwin-Windows/static_2d_array
-CND_PACKAGE_DIR_Release=dist/Release/Cygwin-Windows/package
-CND_PACKAGE_NAME_Release=static2darray.tar
-CND_PACKAGE_PATH_Release=dist/Release/Cygwin-Windows/package/static2darray.tar
+CND_PLATFORM_Release=GNU-MacOSX
+CND_ARTIFACT_DIR_Release=dist/Release/GNU-MacOSX
+CND_ARTIFACT_NAME_Release=minesweeper
+CND_ARTIFACT_PATH_Release=dist/Release/GNU-MacOSX/minesweeper
+CND_PACKAGE_DIR_Release=dist/Release/GNU-MacOSX/package
+CND_PACKAGE_NAME_Release=minesweeper.tar
+CND_PACKAGE_PATH_Release=dist/Release/GNU-MacOSX/package/minesweeper.tar
 #
 # include compiler specific variables
 #
