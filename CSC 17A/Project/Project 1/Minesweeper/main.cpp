@@ -91,8 +91,7 @@ void destroy(GameBoard *b){
 
 GameBoard *placeMine(int rows, int cols){
     int i,j;
-    Elements clue;
-    clue.distance = 49;
+    int distance = 1;
     
     GameBoard *mines = new GameBoard;
     mines->rows=rows;
@@ -112,21 +111,25 @@ GameBoard *placeMine(int rows, int cols){
         mines->data[i][j]= 35;
         }
     
+    
+    
     for(int i=0; i<rows; i++){
         for(int j=0; j<cols; j++){
-            if((i>-1)&&(j>-1)){
+//            if((i>-1)&&(j>-1)){
             if(mines->data[i][j]==35){
-                mines->data[i-1][j-1]=clue.distance;
-                mines->data[i-1][j]=clue.distance;
-                mines->data[i-1][j+1]=clue.distance;
-                mines->data[i][j-1]=clue.distance;
-                mines->data[i][j+1]=clue.distance;
-                mines->data[i+1][j-1]=clue.distance;
-                mines->data[i+1][j]=clue.distance;
-                mines->data[i+1][j+1]=clue.distance;
+                
+                mines->data[i-1][j-1]=distance;
+                mines->data[i-1][j]=distance;
+                mines->data[i-1][j+1]=distance;
+                mines->data[i][j-1]=distance;
+                mines->data[i][j+1]=distance;
+                mines->data[i+1][j-1]=distance;
+                mines->data[i+1][j]=distance;
+                mines->data[i+1][j+1]=distance;
+                distance++;
             }
-            }
-            clue.distance++;
+//            }
+            
         }
     }
     

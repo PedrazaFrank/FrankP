@@ -9,7 +9,7 @@
 #define MINESWEEPER_H
 struct Elements{
     char mine;
-    char distance;
+    int distance;
     char k;
 };
 struct GameBoard{
