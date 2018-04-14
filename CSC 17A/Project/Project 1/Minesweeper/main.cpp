@@ -20,6 +20,7 @@ using namespace std;
 //Function Prototypes
 GameBoard *createBoard(int,int);
 GameBoard *placeMine(int,int);
+char placeClueDistance(GameBoard *,int,int);
 void prntBoard(GameBoard *);
 void destroy(GameBoard *);
 //Execution Begins
@@ -46,7 +47,7 @@ int main(int argc, char** argv) {
 
 GameBoard *createBoard(int rows,int cols){
     Elements square;
-    square.k = 35;
+    square.k = 88;
     GameBoard *board = new GameBoard;
     board->rows=rows;
     board->cols=cols;
@@ -91,7 +92,8 @@ void destroy(GameBoard *b){
 
 GameBoard *placeMine(int rows, int cols){
     int i,j;
-    int distance = 1;
+    Elements clue;
+    clue.distance = 48;
     
     GameBoard *mines = new GameBoard;
     mines->rows=rows;
@@ -107,32 +109,88 @@ GameBoard *placeMine(int rows, int cols){
         do{
             i=rand()%10;
             j=rand()%10;
-        }while(mines->data[i][j]==35);
-        mines->data[i][j]= 35;
+        }while(mines->data[i][j]==88);
+        mines->data[i][j]= 88;
         }
-    
-    
     
     for(int i=0; i<rows; i++){
         for(int j=0; j<cols; j++){
-//            if((i>-1)&&(j>-1)){
-            if(mines->data[i][j]==35){
-                
-                mines->data[i-1][j-1]=distance;
-                mines->data[i-1][j]=distance;
-                mines->data[i-1][j+1]=distance;
-                mines->data[i][j-1]=distance;
-                mines->data[i][j+1]=distance;
-                mines->data[i+1][j-1]=distance;
-                mines->data[i+1][j]=distance;
-                mines->data[i+1][j+1]=distance;
-                distance++;
+            if(mines->data[i][j]==88){
+                mines->data[i][j]=88;
             }
-//            }
-            
+            else{
+                mines->data[i][j]=46;
+            }
+        }
+    }
+    
+    for(int i=0; i<rows; i++){
+        for(int j=0; j<cols; j++){
+            mines->data[i][j] = placeClueDistance(mines,i,j);
+        }
+    }
+    
+    for(int j=0; j<cols; j++){
+        for(int i=0; i<rows; i++){
+            if(mines->data[i][j] == 48){
+                mines->data[i][j] = 46;
+            }
         }
     }
     
     return mines;
 }
 
+char placeClueDistance(GameBoard *m,int clueX,int clueY){
+    
+    if(m->data[clueX][clueY]==88){
+        return 88;
+    }
+    char distance=48;
+    
+    if (clueX > 0 && clueY > 0) { 
+        if (m->data[clueX - 1][clueY - 1] == 88) { 
+            distance++; 
+        } 
+    } // Bottom Right
+    if (clueY > 0) { 
+        if (m->data[clueX][clueY - 1] == 88) { 
+            distance++; 
+        } 
+    } // Right
+    if (clueX < 10 - 1 && clueY > 0) {
+        if (m->data[clueX + 1][clueY - 1] == 88) { 
+            distance++; 
+        } 
+    } // Top  Right
+
+    if (clueX > 0) {
+        if (m->data[clueX - 1][clueY] == 88) {
+            distance++; 
+        }
+    } // Bottom
+    if (clueX < 10 - 1) {
+        if (m->data[clueX + 1][clueY] == 88) {
+            distance++; 
+        } 
+    } // Top
+    if (clueY < 10 - 1) {
+        if (m->data[clueX][clueY + 1] == 88) {
+            distance++; 
+        } 
+    } // Left
+
+    if (clueX > 0 && clueY < 10 - 1) {
+        if (m->data[clueX - 1][clueY + 1] == 88) {
+            distance++; 
+        } 
+    } // Bottom Left
+//
+    if (clueX < 10 - 1 && clueY < 10 - 1) {
+        if (m->data[clueX + 1][clueY + 1] == 88) {
+            distance++; 
+        } 
+    } // Top Left
+
+	return distance;
+}
