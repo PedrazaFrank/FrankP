@@ -19,18 +19,29 @@ using namespace std;
 
 //Function Prototypes
 GameBoard *createBoard(int,int);
+GameBoard *placeMine(int,int);
 void prntBoard(GameBoard *);
 void destroy(GameBoard *);
 //Execution Begins
 int main(int argc, char** argv) {
+    srand(static_cast<unsigned int>(time(0)));
     
     int row=10, col=10;
     GameBoard *board = createBoard(row, col);
+    GameBoard *mines = placeMine(row, col);
     
+    cout << "Before placing mines" << endl;
     prntBoard(board);
     
-    destroy(board);
+//    placeMine(mines);
+    cout << endl << "After placing mines" << endl;
+    prntBoard(board);
     
+    cout << endl << "Mines Array" << endl;
+    prntBoard(mines);
+    
+    destroy(board);
+    destroy(mines);
 }
 
 GameBoard *createBoard(int rows,int cols){
@@ -46,7 +57,7 @@ GameBoard *createBoard(int rows,int cols){
     
     for(int i=0;i<rows;i++){
         for(int j=0;j<cols;j++){
-            board->data[i][j]= square.k;
+            board->data[i][j]= 46;
         }
     }
     return board;
@@ -77,3 +88,48 @@ void destroy(GameBoard *b){
     delete []b->data;
     delete b;
 }
+
+GameBoard *placeMine(int rows, int cols){
+    int i,j;
+    Elements clue;
+    clue.distance = 49;
+    
+    GameBoard *mines = new GameBoard;
+    mines->rows=rows;
+    mines->cols=cols;
+    mines->data=new char*[rows];
+    for(int i=0;i<rows;i++){
+        mines->data[i]=new char[cols];
+    }
+    
+    for(int m=0;m<10;m++){
+        i=0;
+        j=0;
+        do{
+            i=rand()%10;
+            j=rand()%10;
+        }while(mines->data[i][j]==35);
+        mines->data[i][j]= 35;
+        }
+    
+    for(int i=0; i<rows; i++){
+        for(int j=0; j<cols; j++){
+            if((i>-1)&&(j>-1)){
+            if(mines->data[i][j]==35){
+                mines->data[i-1][j-1]=clue.distance;
+                mines->data[i-1][j]=clue.distance;
+                mines->data[i-1][j+1]=clue.distance;
+                mines->data[i][j-1]=clue.distance;
+                mines->data[i][j+1]=clue.distance;
+                mines->data[i+1][j-1]=clue.distance;
+                mines->data[i+1][j]=clue.distance;
+                mines->data[i+1][j+1]=clue.distance;
+            }
+            }
+            clue.distance++;
+        }
+    }
+    
+    return mines;
+}
+

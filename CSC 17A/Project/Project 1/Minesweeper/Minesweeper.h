@@ -8,8 +8,8 @@
 #ifndef MINESWEEPER_H
 #define MINESWEEPER_H
 struct Elements{
-    bool mine;
-    int distance;
+    char mine;
+    char distance;
     char k;
 };
 struct GameBoard{
