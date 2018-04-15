@@ -10,7 +10,10 @@
 struct Elements{
     char mine;
     char distance;
-    char k;
+    char covered;
+    char uncovered;
+    int numMines;
+    int difficulty;
 };
 struct GameBoard{
     int rows;
