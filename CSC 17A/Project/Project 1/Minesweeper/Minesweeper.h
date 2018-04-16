@@ -11,7 +11,6 @@ struct Elements{
     char mine;
     char distance;
     char covered;
-    char uncovered;
     int numMines;
     int difficulty;
 };

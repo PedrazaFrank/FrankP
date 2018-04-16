@@ -33,14 +33,19 @@ bool gameWon(GameBoard *,GameBoard *,int,int);
 //Execution Begins
 int main(int argc, char** argv) {
     srand(static_cast<unsigned int>(time(0)));
+    
     gameStart();
     
     return 0;
 }
 
 GameBoard *createBoard(int rows,int cols){
+    
+    //Assigns a # for a covered square
     Elements square;
     square.covered = 35;
+    
+    //Dynamically creates a 2D array for the gameboard
     GameBoard *board = new GameBoard;
     board->rows=rows;
     board->cols=cols;
@@ -49,6 +54,7 @@ GameBoard *createBoard(int rows,int cols){
         board->data[i]=new char[cols];
     }
     
+    //Set array elements to square char (#)
     for(int i=0;i<rows;i++){
         for(int j=0;j<cols;j++){
             board->data[i][j]= square.covered;
@@ -58,32 +64,39 @@ GameBoard *createBoard(int rows,int cols){
 }
 
 void prntBoard(GameBoard *b){
-    cout << setw(5) << 1;                                   //Prints the first row of numbers
+    //Prints the first row of numbers
+    cout << setw(5) << 1;                                   
     for(int i=1; i<b->cols; i++){
         cout << setw(4) << i+1;
     }
     cout << endl;
     
+    //Prints the top of the square as a row
     for(int i=0; i<b->rows; i++){
         cout << "  ";
         for(int l=0; l<b->cols; l++){
-            cout << "+---";                                 //Prints the top of the square as a row
+            cout << "+---";
         }
+        
+        //Prints the square the user "clicks" on to reveal
         cout << "+" << endl << setw(2) <<i+1;
         for(int j=0; j<b->cols; j++){
-                cout <<"| " << b->data[i][j] << " ";        //Prints the square the user "clicks" on to reveal
+                cout <<"| " << b->data[i][j] << " ";
             }
-            cout << "|"<<endl;                              //Prints the final line to close off the row of squares
+        cout << "|"<<endl;
         }
 
-        cout << "  ";
-        for(int l=0; l<b->cols; l++){
-            cout << "+---";                                 //Prints the final row to close off the bottoms of the squares
+    //Prints the final row to close off the bottoms of the squares
+    cout << "  ";
+    for(int l=0; l<b->cols; l++){
+        cout << "+---";
     }
     cout << "+";
 }
 
 void destroy(GameBoard *b){
+    
+    //deletes the array to prevent memory leak
     if(!b)return;
     for(int i=0;i<b->rows;i++){
         delete []b->data[i];
@@ -97,7 +110,7 @@ GameBoard *placeMine(int rows, int cols, int mineNumber){
     Elements clue;
     clue.distance = 48;
     
-    
+    //Dynamically creates a 2D array containing mines
     GameBoard *mines = new GameBoard;
     mines->rows=rows;
     mines->cols=cols;
@@ -106,7 +119,8 @@ GameBoard *placeMine(int rows, int cols, int mineNumber){
         mines->data[i]=new char[cols];
     }
     
-    for(int m=0;m<mineNumber;m++){
+    //randomly distributes the mines across the board 
+    for(int m=0;m<mineNumber;m++){                          
         i=0;
         j=0;
         do{
@@ -116,26 +130,13 @@ GameBoard *placeMine(int rows, int cols, int mineNumber){
         mines->data[i][j]= 88;
         }
     
+    //places distance to mine and assigns a "." in place of a 0
     for(int i=0; i<rows; i++){
         for(int j=0; j<cols; j++){
             if(mines->data[i][j]==88){
                 
             }
-            else{
-                mines->data[i][j]=46;
-                mines->data[i][j] = placeClueDistance(mines,i,j,rows,cols);
-            }
-        }
-    }
-    
-    for(int j=0; j<cols; j++){
-        for(int i=0; i<rows; i++){
             mines->data[i][j] = placeClueDistance(mines,i,j,rows,cols);
-        }
-    }
-    
-    for(int j=0; j<cols; j++){
-        for(int i=0; i<rows; i++){
             if(mines->data[i][j] == 48){
                 mines->data[i][j] = 46;
             }
@@ -153,6 +154,7 @@ char placeClueDistance(GameBoard *m,int clueX,int clueY, int row, int col){
     Elements clue;
     clue.distance = 48;
     
+    //increments the number if there are any mines in the eight surrounding squares
     if (clueX > 0 && clueY > 0) { 
         if (m->data[clueX - 1][clueY - 1] == 88) {          // Top Left
             clue.distance++; 
@@ -199,8 +201,11 @@ char placeClueDistance(GameBoard *m,int clueX,int clueY, int row, int col){
 	return clue.distance;
 }
 
- void input(GameBoard *b,GameBoard *m,int rows, int cols){
+void input(GameBoard *b,GameBoard *m,int rows, int cols){
+    //Declare variables for user input
     int r,c;
+    
+    //loop to ask for users choice of square to reveal and checks if game is won or lost
     do{
     prntBoard(b);
     cout << endl << "Reveal a square" << endl;
@@ -222,29 +227,29 @@ char placeClueDistance(GameBoard *m,int clueX,int clueY, int row, int col){
     }while(gameWon(b,m,rows,cols)==false && gameLost(b,r,c)==false);
 }
 
+//Recursive function to uncover the distance from a mine until a "wall" of clues are shown
 void uncover(GameBoard *b, GameBoard *m, int row, int col){
-    
+    //Verifies that a correct input was entered
     if(row>=0 && row<b->rows && col>=0 && col<b->cols){
+        //returns when user selects a square that has already been uncovered
         if(b->data[row][col]==m->data[row][col]){
             return;
         }
+        //A square is uncovered by assigning the value of the mine array to the board array
         b->data[row][col] = m->data[row][col];
-        if(b->data[row][col] == 88){
-            return;
-        }
-        
+        //Returns if square is a mine or a number between 1 and 9
         if(m->data[row][col]==88 || (m->data[row][col]>=49 && m->data[row][col]<=55)){
             return;
         }
     
-        uncover(b,m,row-1,col-1);                           //Top Right
-        uncover(b,m,row-1,col);                             //Top
-        uncover(b,m,row-1,col+1);                           //Top Left
-        uncover(b,m,row,col-1);                             //Left
-        uncover(b,m,row,col+1);                             //Right
-        uncover(b,m,row+1,col-1);                           //Bottom Left
-        uncover(b,m,row+1,col);                             //Bottom
-        uncover(b,m,row+1,col+1);                           //Bottom Right
+        uncover(b,m,row-1,col-1);   //Top Right
+        uncover(b,m,row-1,col);     //Top
+        uncover(b,m,row-1,col+1);   //Top Left
+        uncover(b,m,row,col-1);     //Left
+        uncover(b,m,row,col+1);     //Right
+        uncover(b,m,row+1,col-1);   //Bottom Left
+        uncover(b,m,row+1,col);     //Bottom
+        uncover(b,m,row+1,col+1);   //Bottom Right
     }
     else {
         return;
@@ -252,11 +257,13 @@ void uncover(GameBoard *b, GameBoard *m, int row, int col){
 }
 
 void gameStart(){
+    //Declare variables for game difficulty
     int row, col;
     Elements choice;
     Elements mineNum;
     choice.difficulty=0;
     mineNum.numMines=0;
+    
     do{
         cout << "Select difficulty" << endl;
         cout << "1~ Easy: 10x10 - 10 mines" << endl;
@@ -281,15 +288,18 @@ void gameStart(){
         }
     }while(choice.difficulty<1 || choice.difficulty>3);
     
+    //Creates arrays for the board and mine placement
     GameBoard *board = createBoard(row, col);
     GameBoard *mines = placeMine(row, col, mineNum.numMines);
     
-    cout << endl << "Mines Array" << endl;
-    prntBoard(mines);
-    cout << endl;
+//    Remove comment to cheat and view mines before playing
+//    prntBoard(mines);
+//    cout << endl;
     
+    //Calls function for user input
     input(board,mines,row, col);
     
+    //Deletes arrays
     destroy(board);
     destroy(mines);
 }
@@ -297,12 +307,16 @@ void gameStart(){
 bool gameLost(GameBoard *b,int row, int col){
     bool status;
     
+    //Returns true user selects a mine
     if(b->data[row][col] == 88)
         status=true;
     return status;
 }
+
 bool gameWon(GameBoard *b,GameBoard *m,int rows, int cols){
     bool status;
+    
+    //Compares the two arrays and if everything except the mines are uncovered then player has won
     for(int i=0; i<rows; i++){
         for (int j=0; j<cols; j++){
             if(b->data[i][j]==m->data[i][j]){
