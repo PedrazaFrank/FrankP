@@ -44,7 +44,6 @@ int main(int argc, char** argv) {
     char choice;
 
     do {
-
         cout << "Minesweeper Main Menu\n";
         cout << "1: Play Minesweeper\n";
         cout << "2: High Scores\n";
@@ -115,7 +114,6 @@ void gameStart() {
 }
 
 GameBoard *createBoard(int rows, int cols) {
-
     //Assigns a # for a covered square
     Elements square;
     square.covered = 35;
@@ -167,7 +165,7 @@ GameBoard *placeMine(int rows, int cols, int mineNumber) {
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
             if (mines->data[i][j] == 88) {
-
+                ;
             }
             mines->data[i][j] = placeClueDistance(mines, i, j);
             if (mines->data[i][j] == clue.distance) {
@@ -175,12 +173,10 @@ GameBoard *placeMine(int rows, int cols, int mineNumber) {
             }
         }
     }
-
     return mines;
 }
 
 char placeClueDistance(GameBoard *m, int clueX, int clueY) {
-
     if (m->data[clueX][clueY] == 88) {
         return 88;
     }
@@ -267,7 +263,8 @@ void prntBoard(GameBoard *b) {
 
 void input(GameBoard *b, GameBoard *m, int &diff) {
     //Declare variables for user input
-    int r, c, R;
+    int r, c;
+    char R;
     time_t start;
     time(&start);
 
@@ -320,7 +317,6 @@ void input(GameBoard *b, GameBoard *m, int &diff) {
 }
 
 //Recursive function to uncover the distance from a mine until a "wall" of clues are shown
-
 void uncover(GameBoard *b, GameBoard *m, int row, int col) {
     //Verifies that a correct input was entered
     if (row >= 0 && row < b->rows && col >= 0 && col < b->cols) {
@@ -363,7 +359,6 @@ bool gameLost(GameBoard *b, int row, int col) {
     } else {
         status = false;
     }
-
     return status;
 }
 
@@ -381,12 +376,10 @@ bool gameWon(GameBoard *b, GameBoard *m) {
                 status = false;
                 goto end;
             }
-
         }
     }
     end: ;
     return status;
-
 }
 
 void destroy(GameBoard *b) {
@@ -400,6 +393,7 @@ void destroy(GameBoard *b) {
     delete b;
 }
 
+//checks if player has a top 10 score in their chosen difficulty
 highScores *highScore(int &playerScore, int &diff) {
 
     if (diff == 1) {
@@ -419,6 +413,7 @@ void easyScores(int &playerScore) {
     string tempname;
     int tempscore;
 
+    //fills sturct array from binary file
     fstream scores("EasyHighScores.txt", ios::in | ios::binary);
     if (scores.is_open()) {
         scores.read(reinterpret_cast<char *> (&easyHighScore), sizeof (easyHighScore));
@@ -431,10 +426,11 @@ void easyScores(int &playerScore) {
     }
     scores.close();
 
-
+    //checks if player achieved a new high score
     if (playerScore < easyHighScore[9].score) {
         int num, tempScore;
         string name, tempName;
+        //finds player ranking in top 10
         for (int i = 0; i < 10; i++) {
             if (playerScore < easyHighScore[i].score) {
                 cout << "Congrats, you made the top 10 high scores list\n";
@@ -452,9 +448,10 @@ void easyScores(int &playerScore) {
                 goto end;
             }
         }
-end:
-        ;
+        end: ;
     }
+    
+    //overwrites scores to binary file
     fstream score("EasyHighScores.txt", ios::out | ios::binary);
     if (score.is_open()) {
         score.write(reinterpret_cast<char *> (&easyHighScore), sizeof (easyHighScore));
@@ -478,8 +475,7 @@ void medScores(int playerScore) {
         }
     }
     scores.close();
-
-
+    
     if (playerScore < medHighScore[9].score) {
         int num, tempScore;
         string name, tempName;
@@ -500,8 +496,7 @@ void medScores(int playerScore) {
                 goto end;
             }
         }
-end:
-        ;
+    end: ;
     }
     fstream score("MedHighScores.txt", ios::out | ios::binary);
     if (score.is_open()) {
@@ -527,7 +522,6 @@ void hardScores(int playerScore) {
     }
     scores.close();
 
-
     if (playerScore < hardHighScore[9].score) {
         int num, tempScore;
         string name, tempName;
@@ -548,8 +542,7 @@ void hardScores(int playerScore) {
                 goto end;
             }
         }
-end:
-        ;
+        end: ;
     }
     fstream score("HardHighScores.txt", ios::out | ios::binary);
     if (score.is_open()) {
@@ -565,6 +558,7 @@ void scores() {
     highScores medHighScore[10];
     highScores hardHighScore[10];
 
+    //reads in file to display top 10 scores for each difficulty
     fstream easyScore("EasyHighScores.txt", ios::in | ios::binary);
     easyScore.read(reinterpret_cast<char *> (&easyHighScore), sizeof (easyHighScore));
     cout << setw(32) << "Easy" << endl;
