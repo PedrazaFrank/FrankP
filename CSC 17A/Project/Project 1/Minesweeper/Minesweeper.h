@@ -19,6 +19,10 @@ struct GameBoard{
     int cols;
     char **data;
 };
+struct highScores{
+    string name;
+    int score;
+};
 
 #endif /* MINESWEEPER_H */
 
